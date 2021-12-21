@@ -1,6 +1,6 @@
 ﻿using dotnet_console_crud_series.classes;
 
-bool teste = true;
+bool teste = false;
 
 if(teste == false){
 

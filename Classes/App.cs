@@ -7,7 +7,7 @@ public class App
     {
         public static void Run()
         {
-                Console.WriteLine("App Rodando...");
+            Layout.TelaPrincipal();
         }
 
 
