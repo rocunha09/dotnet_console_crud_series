@@ -17,7 +17,7 @@ Descrição Dio: Algoritmo simples de cadastro de séries para praticar seus con
 
 - Herança
 
-- abstratic class
+- abstract Class
 
 - Console Application
 
