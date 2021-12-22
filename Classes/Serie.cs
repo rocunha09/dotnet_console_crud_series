@@ -23,12 +23,12 @@ namespace dotnet_console_crud_series.Classes
         public string ToString()
         {
             string informacoes = "";
-            informacoes += "\t----------------------------------------" + Environment.NewLine;
-            informacoes += "\tTítulo: \t" + this.titulo + Environment.NewLine; 
-            informacoes += "\tDescrição: \t" + this.descricao + Environment.NewLine; 
-            informacoes += "\tAno: \t\t" + this.ano + Environment.NewLine; 
-            informacoes += "\tGênero: \t" + this.genero + Environment.NewLine; 
-            informacoes += "\t----------------------------------------" + Environment.NewLine;
+            informacoes += "\t\t----------------------------------------" + Environment.NewLine;
+            informacoes += "\t\tTítulo: \t" + this.titulo + Environment.NewLine; 
+            informacoes += "\t\tDescrição: \t" + this.descricao + Environment.NewLine; 
+            informacoes += "\t\tAno: \t\t" + this.ano + Environment.NewLine; 
+            informacoes += "\t\tGênero: \t" + this.genero + Environment.NewLine; 
+            informacoes += "\t\t----------------------------------------" + Environment.NewLine;
 
             return informacoes;
         }

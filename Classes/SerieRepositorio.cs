@@ -19,7 +19,7 @@ namespace dotnet_console_crud_series.Classes
 
         public void Excluir(int id)
         {
-            listaSerie[id].Excluir();;
+            listaSerie[id].Excluir();
         }
 
         public List<Serie> Listar()
@@ -34,7 +34,13 @@ namespace dotnet_console_crud_series.Classes
 
         public Serie Visualizar(int id)
         {
-            return listaSerie[id];
+            bool result = listaSerie.Contains(listaSerie[id]);
+
+            if(result){
+                return listaSerie[id];
+            } else {
+                return null;
+            }
         }
     }
 }

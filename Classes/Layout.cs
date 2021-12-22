@@ -93,14 +93,14 @@ namespace dotnet_console_crud_series.Classes
                 Console.WriteLine("                 =================================       ");
                 
             } else {
-                Console.WriteLine("                 [Título] \t [Descrição]");
+                Console.WriteLine("                 [ID] \t [Título]");
                 Console.WriteLine("                 ---------------------------------");
                 
                 foreach (var serie in serieRepositorio.Listar())
                 {
                     //imprime apenas as que não foram exclídas
                     if(serie.getStatus() == false){
-                        Console.WriteLine($"                 {serie.getId()} \t\t {serie.getTitulo()}");
+                        Console.WriteLine($"                 {serie.getId()} \t {serie.getTitulo()}");
                         Console.WriteLine("                 ---------------------------------");
                     }
                 }
@@ -164,9 +164,9 @@ namespace dotnet_console_crud_series.Classes
             Console.WriteLine("                 =================================       ");
             int id = int.Parse(Console.ReadLine());
 
-            //busca no repositório e então imprime dados da série.
-            //Console.WriteLine(s.ToString());
-
+            Serie serie = serieRepositorio.Visualizar(id);
+            Console.WriteLine(serie.ToString());
+            
             Thread.Sleep(1500);
             Voltar();
         }
@@ -180,42 +180,48 @@ namespace dotnet_console_crud_series.Classes
             Console.WriteLine("                 =================================       ");
             int id = int.Parse(Console.ReadLine());
 
-            //pesquisa série no repositório...
+            if(serieRepositorio.Visualizar(id) != null){
 
-            Console.WriteLine();
-            Console.WriteLine("                 Entre com o Título da série:  ");
-            Console.WriteLine("                 =================================       ");
-            string titulo = Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine("                 Entre com o Título da série:  ");
+                Console.WriteLine("                 =================================       ");
+                string titulo = Console.ReadLine();
 
-            Console.WriteLine("                 Entre com a Descrição da série:  ");
-            Console.WriteLine("                 =================================       ");
-            string descricao = Console.ReadLine();
+                Console.WriteLine("                 Entre com a Descrição da série:  ");
+                Console.WriteLine("                 =================================       ");
+                string descricao = Console.ReadLine();
 
-            Console.WriteLine("                 Entre com o Ano de lançamento da série:  ");
-            Console.WriteLine("                 =================================       ");
-            string ano = Console.ReadLine();
+                Console.WriteLine("                 Entre com o Ano de lançamento da série:  ");
+                Console.WriteLine("                 =================================       ");
+                string ano = Console.ReadLine();
 
-            Console.WriteLine("                 Entre com o Gênero da série:  ");
-            Console.WriteLine("                 =================================       ");
-            Console.WriteLine();
-            Console.WriteLine("                -------Lista de Gêneros------------");
+                Console.WriteLine("                 Entre com o Gênero da série:  ");
+                Console.WriteLine("                 =================================       ");
+                Console.WriteLine();
+                Console.WriteLine("                -------Lista de Gêneros------------");
+                
+                foreach(int i in Enum.GetValues(typeof(Genero))){
+                Console.WriteLine($" \t\t {i} \t" + Enum.GetName(typeof(Genero), i)); 
+                }
+
+                Console.WriteLine("                ----------------------------------");
+                int genero = int.Parse(Console.ReadLine());
+                Console.WriteLine("                 =================================       ");
+
+                Serie serie = new Serie(id, titulo, descricao, ano, genero);
+                serieRepositorio.Atualizar(id, serie);            
             
-            foreach(int i in Enum.GetValues(typeof(Genero))){
-            Console.WriteLine($" \t\t {i} \t" + Enum.GetName(typeof(Genero), i)); 
+                Console.Clear();
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Console.WriteLine($"                 Série {serie.getTitulo()} atualizada com sucesso! ");
+                Console.WriteLine("                 =================================       ");
+            } else {
+                Console.WriteLine();
+                Console.WriteLine("                 Série Não encontrada! ");
+                Console.WriteLine("                 =================================       ");
             }
-
-            Console.WriteLine("                ----------------------------------");
-            int genero = int.Parse(Console.ReadLine());
-            Console.WriteLine("                 =================================       ");
-
-            //atualiza série no repositório...
-            
-            Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine($"                 Série {titulo} atualizada com sucesso! ");
-            Console.WriteLine("                 =================================       ");
 
             //aguarda 0.5 segundos
             Thread.Sleep(1500);
@@ -232,14 +238,19 @@ namespace dotnet_console_crud_series.Classes
             Console.WriteLine("                 =================================       ");
             int id = int.Parse(Console.ReadLine());
 
-            //busca no repositório e então altera o status para true.
-            //
+            if(serieRepositorio.Visualizar(id) != null){
+                serieRepositorio.Excluir(id);
 
             Console.Clear();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine($"                 Série excluída com sucesso!            ");
             Console.WriteLine("                 =================================       ");
+            } else {
+                Console.WriteLine();
+                Console.WriteLine("                 Série Não encontrada! ");
+                Console.WriteLine("                 =================================       ");
+            }
 
             //aguarda 1.5 segundos
             Thread.Sleep(1500);
