@@ -5,6 +5,7 @@ namespace dotnet_console_crud_series.Classes
     public class Layout
     {
         private static int opcao = 0;
+        public static SerieRepositorio serieRepositorio;
 
         public static void TelaPrincipal()
         {
@@ -84,26 +85,26 @@ namespace dotnet_console_crud_series.Classes
             Console.WriteLine("                 Lista de séries cadastradas             ");
             Console.WriteLine("                 =================================       ");
 
-            //verifica a quantidade de séries cadastradas e itera sobre a lista...
+            int seriesCadastradas = serieRepositorio.ProximoId();
 
-            // if(seriesCadastradas == 0){
-            //     Console.WriteLine();
-            //     Console.WriteLine("                 Nenhuma Série cadastrada                ");
-            //     Console.WriteLine("                 =================================       ");
+            if(seriesCadastradas == 0){
+                Console.WriteLine();
+                Console.WriteLine("                 Nenhuma Série cadastrada                ");
+                Console.WriteLine("                 =================================       ");
                 
-            // } else {
-            //     Console.WriteLine("          [Título] -\t [Descrição] -\t [Gênero]    ");
-            //     Console.WriteLine("         -----------------------------------------");
+            } else {
+                Console.WriteLine("                 [Título] \t [Descrição]");
+                Console.WriteLine("                 ---------------------------------");
                 
-            //     foreach (var serie in ListaSeries)
-            //     {
-            //         //imprime apenas as que não foram exclídas
-            //         if(status == false){
-            //             Console.WriteLine($"          {titulo} -\t {descricao} -\t {genero}    ");
-            //             Console.WriteLine("         -----------------------------------------");
-            //         }
-            //     }
-            // }
+                foreach (var serie in serieRepositorio.Listar())
+                {
+                    //imprime apenas as que não foram exclídas
+                    if(serie.getStatus() == false){
+                        Console.WriteLine($"                 {serie.getId()} \t\t {serie.getTitulo()}");
+                        Console.WriteLine("                 ---------------------------------");
+                    }
+                }
+            }
 
             Thread.Sleep(1500);
             Voltar();
@@ -139,8 +140,8 @@ namespace dotnet_console_crud_series.Classes
             int genero = int.Parse(Console.ReadLine());
             Console.WriteLine("                 =================================       ");
 
-            //a criação da série dependerá do repositório... portando será alterado...
-            //cria série e salva no repositório...
+            Serie serie = new Serie(serieRepositorio.ProximoId(), titulo, descricao, ano, genero);
+            serieRepositorio.Cadastrar(serie);
             
             Console.Clear();
             Console.WriteLine();
@@ -149,7 +150,7 @@ namespace dotnet_console_crud_series.Classes
             Console.WriteLine($"                 Série {titulo} cadastrada com sucesso! ");
             Console.WriteLine("                 =================================       ");
 
-            //aguarda 0.5 segundos
+            //aguarda 1.5 segundos
             Thread.Sleep(1500);
             TelaPrincipal();
         }

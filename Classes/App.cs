@@ -7,6 +7,9 @@ public class App
     {
         public static void Run()
         {
+            SerieRepositorio serieRepositorio = new SerieRepositorio();
+            Layout.serieRepositorio = serieRepositorio;
+            
             Layout.TelaPrincipal();
         }
 
@@ -21,18 +24,18 @@ public class App
 
         private static void TestarSerie()
         {
-            Serie s = new Serie(
-                100, 
-                "Heroes",
-                "Série de Heróis",
-                "2006",
-                Genero.Ficcao_Cientifica
-            );
+            // Serie s = new Serie(
+            //     100, 
+            //     "Heroes",
+            //     "Série de Heróis",
+            //     "2006",
+            //     Genero.Ficcao_Cientifica
+            // );
 
-            Console.WriteLine(s.ToString());
-            Console.WriteLine("Excluído: " + s.getStatus());
-            s.Excluir();
-            Console.WriteLine("Excluído: " + s.getStatus());
+            // Console.WriteLine(s.ToString());
+            // Console.WriteLine("Excluído: " + s.getStatus());
+            // s.Excluir();
+            // Console.WriteLine("Excluído: " + s.getStatus());
         }
     }
 }
